@@ -23,7 +23,12 @@ const orderSchema = new mongoose.Schema({
         required: [true, 'Email is required'],
         trim: true,
         match: [/^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/, 'Please enter a valid email address'],
-    }
+    },
+    status: {
+        type: String,
+        enum: ['pending', 'confirmed', 'completed', 'cancelled'], 
+        default: 'pending'
+    },
 });
 
 module.exports = mongoose.model('Order', orderSchema);

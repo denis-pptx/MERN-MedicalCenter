@@ -1,15 +1,15 @@
-const Service = require('../models/service');
+const Order = require('../models/order');
 
-const serviceController = {
+const orderController = {
     get: async (req, res) => {
         try {
             const filter = {}
-            if (req.query.category) {
-                filter.category = req.query.category;
+            if (req.query.status) {
+                filter.status = req.query.status;
             }
 
-            const services = await Service.find(filter);
-            res.status(200).json(services);
+            const orders = await Order.find(filter);
+            res.status(200).json(orders);
         } catch (error) {
             console.error(error);
             res.status(500).json({
@@ -21,11 +21,11 @@ const serviceController = {
 
     getById: async (req, res) => {
         try {
-            const service = await Service.findById(req.params.id);
-            if (!service) {
-                return res.status(404).json({ message: 'Service not found' });
+            const order = await Order.findById(req.params.id);
+            if (!order) {
+                return res.status(404).json({ message: 'Order not found' });
             }
-            res.status(200).json(category);
+            res.status(200).json(order);
         } catch (error) {
             console.error(error);
             res.status(500).json({
@@ -35,12 +35,11 @@ const serviceController = {
         }
     },
 
-
     create: async (req, res) => {
         try {
-            const newService = new Service(req.body);
-            await newService.save();
-            res.status(201).json(newService);
+            const newOrder = new Order(req.body);
+            await newOrder.save();
+            res.status(201).json(newOrder);
         } catch (error) {
             console.error(error);
             res.status(error.name === 'ValidationError' ? 400 : 500).json({
@@ -52,17 +51,17 @@ const serviceController = {
 
     update: async (req, res) => {
         try {
-            const service = await Service.findByIdAndUpdate(
+            const order = await Order.findByIdAndUpdate(
                 req.params.id,
                 req.body,
                 { new: true, runValidators: true }
             );
 
-            if (!service) {
-                return res.status(404).json({ message: 'Service not found' });
+            if (!order) {
+                return res.status(404).json({ message: 'Order not found' });
             }
 
-            res.status(200).json(service);
+            res.status(200).json(order);
         } catch (error) {
             console.error(error);
             res.status(error.name === 'ValidationError' ? 400 : 500).json({
@@ -74,13 +73,13 @@ const serviceController = {
 
     delete: async (req, res) => {
         try {
-            const service = await Service.findByIdAndDelete(req.params.id);
+            const order = await Order.findByIdAndDelete(req.params.id);
 
-            if (!service) {
-                return res.status(404).json({ message: 'Service not found' });
+            if (!order) {
+                return res.status(404).json({ message: 'Order not found' });
             }
 
-            res.status(200).json({ message: 'Service deleted successfully' });
+            res.status(200).json({ message: 'Order deleted successfully' });
         } catch (error) {
             console.error(error);
             res.status(500).json({
@@ -91,4 +90,4 @@ const serviceController = {
     },
 };
 
-module.exports = serviceController;
+module.exports = orderController;
