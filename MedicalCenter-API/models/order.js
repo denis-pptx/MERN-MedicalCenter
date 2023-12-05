@@ -1,11 +1,6 @@
 const mongoose = require('mongoose');
 
 const orderSchema = new mongoose.Schema({
-    service: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Service',
-        required: [true, 'Service reference is required for the order'],
-    },
     name: {
         type: String,
         required: [true, 'Name is required for the order'],
@@ -26,8 +21,20 @@ const orderSchema = new mongoose.Schema({
     },
     status: {
         type: String,
-        enum: ['pending', 'confirmed', 'completed', 'cancelled'], 
-        default: 'pending'
+        enum: ['pending', 'confirmed', 'completed', 'cancelled'],
+        default: 'pending',
+    },
+    service: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Service',
+        required: [true, 'Service reference is required for the order'],
+        validate: {
+            validator: async function (value) {
+                const service = await mongoose.model('Service').findById(value);
+                return service !== null;
+            },
+            message: 'Invalid service reference',
+        },
     },
 });
 

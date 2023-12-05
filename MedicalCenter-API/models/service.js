@@ -23,6 +23,13 @@ const serviceSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Category',
         required: [true, 'Category is required for the service'],
+        validate: {
+            validator: async function (value) {
+                const category = await mongoose.model('Category').findById(value);
+                return category !== null;
+            },
+            message: 'Invalid category reference',
+        },
     },
 });
 
