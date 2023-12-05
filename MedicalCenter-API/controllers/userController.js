@@ -16,9 +16,8 @@ const userController = {
     },
 
     getById: async (req, res) => {
-        const userId = req.params.id;
         try {
-            const user = await User.findById(userId);
+            const user = await User.findById(req.params.id);
             if (!user) {
                 return res.status(404).json({ message: 'User not found' });
             }
@@ -34,12 +33,12 @@ const userController = {
 
     create: async (req, res) => {
         try {
-            const newUser = new User({...req.body});
+            const newUser = new User(req.body);
             await newUser.save();
             res.status(201).json({ message: 'User created successfully' });
         } catch (error) {
             console.error(error);
-            res.status(500).json({
+            res.status(error.name === 'ValidationError' ? 400 : 500).json({
                 name: error.name,
                 message: error.message
             });
@@ -50,8 +49,8 @@ const userController = {
         try {
             const user = await User.findByIdAndUpdate(
                 req.params.id,
-                { ...req.body },
-                { new: true }
+                req.body,
+                { new: true, runValidators: true }
             );
 
             if (!user) {
@@ -61,7 +60,7 @@ const userController = {
             res.status(200).json(user);
         } catch (error) {
             console.error(error);
-            res.status(500).json({
+            res.status(error.name === 'ValidationError' ? 400 : 500).json({
                 name: error.name,
                 message: error.message
             });
