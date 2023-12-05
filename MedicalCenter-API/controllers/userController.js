@@ -39,7 +39,7 @@ const userController = {
             res.status(201).json({ message: 'User created successfully' });
         } catch (error) {
             console.error(error);
-            rres.status(500).json({
+            res.status(500).json({
                 name: error.name,
                 message: error.message
             });
