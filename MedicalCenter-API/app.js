@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const serviceRoutes = require('./routes/serviceRoutes');
 
 const app = express();
 
@@ -18,6 +19,7 @@ app.use(express.json());
 
 app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoutes);
+app.use('/api/service', serviceRoutes);
 
 app.listen(3000, () => {
     console.log(`Server is running on port 3000`);
