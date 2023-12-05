@@ -1,9 +1,14 @@
 const Service = require('../models/service');
 
 const serviceController = {
-    getAll: async (req, res) => {
+    get: async (req, res) => {
         try {
-            const services = await Service.find();
+            const filter = {}
+            if (req.query.category) {
+                filter.category = req.query.category;
+            }
+
+            const services = await Service.find(filter);
             res.status(200).json(services);
         } catch (error) {
             console.error(error);
