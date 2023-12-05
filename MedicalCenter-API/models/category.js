@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Service = require('./service');
 
 const categorySchema = new mongoose.Schema({
     name: {
@@ -13,6 +14,16 @@ const categorySchema = new mongoose.Schema({
         type: String,
         default: '',
         maxlength: [500, 'Category description cannot exceed 500 characters'],
+    }
+});
+
+categorySchema.post('findOneAndDelete', async (doc) => {
+    try {
+        if (doc) {
+            await Service.deleteMany({ category: doc._id })
+        }
+    } catch (error) {
+        console.error(error);
     }
 });
 
