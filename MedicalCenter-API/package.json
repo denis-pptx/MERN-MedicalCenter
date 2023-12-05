@@ -1,19 +1,19 @@
 {
-  "name": "medicalcenter-api",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "dev": "nodemon app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "express": "^4.18.2",
-    "mongoose": "^8.0.2"
-  },
-  "devDependencies": {
-    "nodemon": "^3.0.2"
-  }
+    "name": "medicalcenter-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "dev": "nodemon app.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.18.2",
+        "mongoose": "^8.0.2"
+    },
+    "devDependencies": {
+        "nodemon": "^3.0.2"
+    }
 }
