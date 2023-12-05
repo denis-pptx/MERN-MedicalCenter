@@ -1,11 +1,10 @@
-const User = require('../models/user');
+const Category = require('../models/category');
 
-const userController = {
-
+const categoryController = {
     getAll: async (req, res) => {
         try {
-            const users = await User.find();
-            res.status(200).json(users);
+            const categories = await Category.find();
+            res.status(200).json(categories);
         } catch (error) {
             console.error(error);
             res.status(500).json({
@@ -17,11 +16,11 @@ const userController = {
 
     getById: async (req, res) => {
         try {
-            const user = await User.findById(req.params.id);
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
+            const category = await Category.findById(req.params.id);
+            if (!category) {
+                return res.status(404).json({ message: 'Category not found' });
             }
-            res.status(200).json(user);
+            res.status(200).json(category);
         } catch (error) {
             console.error(error);
             res.status(500).json({
@@ -33,9 +32,9 @@ const userController = {
 
     create: async (req, res) => {
         try {
-            const newUser = new User(req.body);
-            await newUser.save();
-            res.status(201).json(newUser);
+            const newCategory = new Category(req.body);
+            await newCategory.save();
+            res.status(201).json(newCategory);
         } catch (error) {
             console.error(error);
             res.status(error.name === 'ValidationError' ? 400 : 500).json({
@@ -47,17 +46,17 @@ const userController = {
 
     update: async (req, res) => {
         try {
-            const user = await User.findByIdAndUpdate(
+            const category = await Category.findByIdAndUpdate(
                 req.params.id,
                 req.body,
                 { new: true, runValidators: true }
             );
 
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
+            if (!category) {
+                return res.status(404).json({ message: 'Category not found' });
             }
 
-            res.status(200).json(user);
+            res.status(200).json(category);
         } catch (error) {
             console.error(error);
             res.status(error.name === 'ValidationError' ? 400 : 500).json({
@@ -69,13 +68,13 @@ const userController = {
 
     delete: async (req, res) => {
         try {
-            const user = await User.findByIdAndDelete(req.params.id);
+            const category = await Category.findByIdAndDelete(req.params.id);
 
-            if (!user) {
-                return res.status(404).json({ message: 'User not found' });
+            if (!category) {
+                return res.status(404).json({ message: 'Category not found' });
             }
 
-            res.status(200).json({ message: 'User deleted successfully' });
+            res.status(200).json({ message: 'Category deleted successfully' });
         } catch (error) {
             console.error(error);
             res.status(500).json({
@@ -86,4 +85,4 @@ const userController = {
     },
 };
 
-module.exports = userController;
+module.exports = categoryController;
