@@ -1,5 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
+require('dotenv').config();
 
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
@@ -9,7 +10,7 @@ const orderRoutes = require('./routes/orderRoutes');
 const app = express();
 
 
-mongoose.connect('mongodb+srv://denis-pptx:gU2EF2hbKVmJfWN7@cluster0.5r0m5x1.mongodb.net/medical-center?retryWrites=true&w=majority')
+mongoose.connect(process.env.DATABASE_URL)
     .then(() => console.log('Connected to the database'))
     .catch(err => {
         console.error('Error connecting to the database:', err);
@@ -23,6 +24,7 @@ app.use('/api/category', categoryRoutes);
 app.use('/api/service', serviceRoutes);
 app.use('/api/order', orderRoutes);
 
-app.listen(3000, () => {
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
     console.log(`Server is running on port 3000`);
 });
