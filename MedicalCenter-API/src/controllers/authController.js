@@ -33,13 +33,7 @@ const authController = {
 
             const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '30d' });
 
-            res.status(200).json({
-                token,
-                user: {
-                    id: user._id,
-                    login: user.login
-                }
-            });
+            res.status(200).json({token});
         } catch (error) {
             res.status(500).json({ error: 'Internal Server Error' });
         }
