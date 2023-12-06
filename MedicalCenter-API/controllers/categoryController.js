@@ -7,10 +7,9 @@ const categoryController = {
             res.status(200).json(categories);
         } catch (error) {
             console.error(error);
-            res.status(500).json({
-                name: error.name,
-                message: error.message
-            });
+
+            const {name, message} = error;
+            res.status(500).json({name, message});
         }
     },
 
@@ -23,10 +22,9 @@ const categoryController = {
             res.status(200).json(category);
         } catch (error) {
             console.error(error);
-            res.status(500).json({
-                name: error.name,
-                message: error.message
-            });
+
+            const {name, message} = error;
+            res.status(500).json({name, message});
         }
     },
 
@@ -37,10 +35,9 @@ const categoryController = {
             res.status(201).json(newCategory);
         } catch (error) {
             console.error(error);
-            res.status(error.name === 'ValidationError' ? 400 : 500).json({
-                name: error.name,
-                message: error.message
-            });
+
+            const {name, message} = error;
+            res.status(name === 'ValidationError' ? 400 : 500).json({name, message});
         }
     },
 
@@ -59,10 +56,9 @@ const categoryController = {
             res.status(200).json(category);
         } catch (error) {
             console.error(error);
-            res.status(error.name === 'ValidationError' ? 400 : 500).json({
-                name: error.name,
-                message: error.message
-            });
+
+            const {name, message} = error;
+            res.status(name === 'ValidationError' ? 400 : 500).json({name, message});
         }
     },
 
@@ -77,10 +73,9 @@ const categoryController = {
             res.status(200).json({ message: 'Category deleted successfully' });
         } catch (error) {
             console.error(error);
-            res.status(500).json({
-                name: error.name,
-                message: error.message
-            });
+            
+            const {name, message} = error;
+            res.status(500).json({name, message});
         }
     },
 };
