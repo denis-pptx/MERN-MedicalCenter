@@ -10,11 +10,13 @@ const authMiddleware = (req, res, next) => {
 
     const token = authorization.split(' ')[1];
 
-    jwt.verify(token, process.env.SECRET_KEY, (err, payload) => {
+    jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
         if (err) {
             return res.status(403).json({ message: 'Forbidden: Invalid token' });
         }
-        req.userId = payload.userId;
+
+        req.user = user;
+        console.log(req.user)
         next();
     });
 };

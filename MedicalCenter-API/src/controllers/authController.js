@@ -1,6 +1,8 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const UserDto = require('../dtos/userDto')
+
 require('dotenv').config();
 
 const authController = {
@@ -30,10 +32,11 @@ const authController = {
             if (!user || !(await bcrypt.compare(password, user.password))) {
                 return res.status(401).json({ error: 'Invalid login or password' });
             }
-
-            const token = jwt.sign({ userId: user._id }, process.env.SECRET_KEY, { expiresIn: '30d' });
-
-            res.status(200).json({token});
+            
+            const userDto = new UserDto(user);
+            const token = jwt.sign({...userDto}, process.env.SECRET_KEY, { expiresIn: '30d' });
+            
+            res.status(200).json({token, user: userDto});
         } catch (error) {
             res.status(500).json({ error: 'Internal Server Error' });
         }
