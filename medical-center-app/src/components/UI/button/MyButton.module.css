@@ -1,0 +1,13 @@
+.myBtn {
+    background-color: var(--deep-blue);
+    color: #ffffff;
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.myBtn:hover {
+    background-color: var(--dark-blue);
+}
