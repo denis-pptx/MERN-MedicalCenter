@@ -6,6 +6,7 @@ const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const serviceRoutes = require('./routes/serviceRoutes');
 const orderRoutes = require('./routes/orderRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoutes);
 app.use('/api/service', serviceRoutes);
 app.use('/api/order', orderRoutes);
+app.use('/api/auth', authRoutes);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
