@@ -1,6 +1,7 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
-require('dotenv').config();
+const cors = require('cors');
 
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
@@ -19,6 +20,10 @@ mongoose.connect(process.env.DATABASE_URL)
     });
 
 app.use(express.json());
+app.use(cors({
+    credentials: true,
+    origin: process.env.CLIENT_URL
+}));
 
 app.use('/api/user', userRoutes);
 app.use('/api/category', categoryRoutes);
@@ -26,7 +31,7 @@ app.use('/api/service', serviceRoutes);
 app.use('/api/order', orderRoutes);
 app.use('/api/auth', authRoutes);
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-    console.log(`Server is running on port 3000`);
+    console.log(`Server is running on port 5000`);
 });
