@@ -1,6 +1,17 @@
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
     font-family: Arial;
+}
+
+
+.page {
+    width: 80%;
+    margin: 30px auto;
+}
+
+body {
+    margin: 0;
+    padding: 0;
 }

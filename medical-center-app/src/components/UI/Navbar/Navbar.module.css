@@ -3,22 +3,23 @@ nav {
     padding: 12px;
 }
 
-ul {
+nav ul {
     list-style-type: none;
     display: flex;
 }
 
-li {
+nav li {
     margin-right: 25px;
+    padding: 0;
 }
 
-a {
+nav a {
     text-decoration: none;
     color: #fff;
     font-size: 20px;
     font-weight: bold;
 }
 
-a:hover {
+nav :hover {
     color: #ffcc00;
 }
