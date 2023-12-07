@@ -1,8 +1,13 @@
 :root {
-    --light-gray: #ececec;
-    --mint-green: #9fd3c7;
-    --deep-blue: #385170;
-    --dark-blue: #142d4c;
+    --light-gray: rgb(236, 236, 236);
+    --mint-green: rgb(159, 211, 199);
+    --deep-blue: rgb(56, 81, 112);
+    --dark-blue: rgb(20, 45, 76);
+
+    --light-gray-transparent-50: rgba(236, 236, 236, 0.5);
+    --mint-green-transparent-50: rgba(159, 211, 199, 0.5);
+    --deep-blue-transparent-50: rgba(56, 81, 112, 0.5);
+    --dark-blue-transparent-50: rgba(20, 45, 76, 0.5);
 }
 
 * {
