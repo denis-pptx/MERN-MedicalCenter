@@ -9,6 +9,7 @@ const Services = () => {
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
+    const [sortOrder, setSortOrder] = useState('');
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/service')
@@ -29,6 +30,17 @@ const Services = () => {
             service.name.toLowerCase().includes(searchTerm.toLowerCase())
         )
         : filteredServices;
+
+
+    const sortedServices = sortOrder
+        ? [...filteredSearchedServices].sort((a, b) => {
+            if (sortOrder === 'asc') {
+                return a.cost - b.cost;
+            } else {
+                return b.cost - a.cost;
+            }
+        })
+        : filteredSearchedServices;
 
     return (
         <div className="page">
@@ -53,7 +65,18 @@ const Services = () => {
                 ]}
             />
 
-            <ServiceList services={filteredSearchedServices} />
+            <MySelect
+                value={sortOrder}
+                onChange={(e) => setSortOrder(e.target.value)}
+                defaultName="Сортировка"
+                options={[
+                    { name: 'По умолчанию', value: '' },
+                    { name: 'Цена (возрастание)', value: 'asc' },
+                    { name: 'Цена (убывание)', value: 'desc' }
+                ]}
+            />
+
+            <ServiceList services={sortedServices} />
         </div>
     );
 };
