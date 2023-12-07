@@ -18,13 +18,12 @@
 }
 
 
-.page {
-    width: 80%;
-    margin: 30px auto;
-}
-
 body {
     margin: 0;
     padding: 0;
     background-color: var(--light-gray);
+}
+
+.form-group {
+    margin-bottom: 10px;
 }

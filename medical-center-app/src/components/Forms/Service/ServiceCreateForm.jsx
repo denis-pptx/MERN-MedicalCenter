@@ -55,7 +55,7 @@ const ServiceCreateForm = ({ create, categories }) => {
 
             {error && <div className={styles['error-message']}>{error}</div>}
 
-            <div class={styles['form-group']}>
+            <div class='form-group'>
                 <MyInput
                     value={service.name}
                     onChange={(e) => setService({ ...service, name: e.target.value })}
@@ -65,7 +65,7 @@ const ServiceCreateForm = ({ create, categories }) => {
             </div>
 
 
-            <div class={styles['form-group']}>
+            <div class='form-group'>
                 <MyTextArea
                     value={service.description}
                     onChange={(e) => setService({ ...service, description: e.target.value })}
@@ -73,7 +73,7 @@ const ServiceCreateForm = ({ create, categories }) => {
                 />
             </div>
 
-            <div class={styles['form-group']}>
+            <div class='form-group'>
                 <MyInput
                     value={service.cost}
                     onChange={(e) => setService({ ...service, cost: e.target.value })}
@@ -82,7 +82,7 @@ const ServiceCreateForm = ({ create, categories }) => {
                 />
             </div>
 
-            <div class={styles['form-group']}>
+            <div class='form-group'>
                 <MySelect
                     value={service.category}
                     onChange={(e) => setService({ ...service, category: e.target.value })}
