@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ServiceList from '../components/Lists/ServiceList';
 import MySelect from '../components/UI/select/MySelect';
-import MyInput from '../components/UI/input/MyInput';
+import MyTextInput from '../components/UI/TextInput/MyTextInput';
 
 const Services = () => {
     const [services, setServices] = useState([]);
@@ -46,7 +46,7 @@ const Services = () => {
         <div className="page">
             <h1>Services Page</h1>
 
-            <MyInput
+            <MyTextInput
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Название"
