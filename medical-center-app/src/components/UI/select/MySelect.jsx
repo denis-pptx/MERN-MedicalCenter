@@ -6,7 +6,7 @@ const MySelect = ({ options, defaultName, value, onChange }) => {
         <select
             className={styles.select}
             value={value}
-            onChange={event => onChange(event.target.value)}
+            onChange={event => onChange(event)}
         >
             <option
                 className={styles.option} 
