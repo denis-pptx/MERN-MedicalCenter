@@ -1,0 +1,22 @@
+.error-message {
+    color: darkred;
+    font-size: 15px;
+    background-color: pink;
+    padding: 7px;
+    border-radius: 6px;
+    margin: 10px 0;
+}
+
+.form {
+    width: 25vw;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.title {
+    font-size: 2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}

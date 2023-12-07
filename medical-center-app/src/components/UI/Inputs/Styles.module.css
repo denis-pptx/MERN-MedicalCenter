@@ -1,14 +1,26 @@
-.select {
+.input,
+.select,
+.textArea {
     width: 100%;
     padding: 8px;
     font-size: 16px;
     border: 1px solid #ccc;
     border-radius: 4px;
     outline: none;
-    transition: border-color 0.2s ease-in-out;
+    display: block;
 }
 
-.select:hover, .select:focus {
+.textArea {
+    resize: none;
+    height: 5em;
+}
+
+.input:hover,
+.input:focus,
+.select:focus,
+.select:focus,
+.textArea:hover,
+.textArea:focus {
     border-color: #3498db;
 }
 

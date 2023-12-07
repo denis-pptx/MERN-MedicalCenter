@@ -1,14 +1,13 @@
 import React from 'react';
-import styles from './MyTextInput.module.css';
+import styles from './Styles.module.css';
 
-const MyTextInput = (props) => {
+const MyInput = (props) => {
     return (
         <input
-            type="text"
             className={styles.input}
             {...props}
         />
     );
 };
 
-export default MyTextInput;
+export default MyInput;

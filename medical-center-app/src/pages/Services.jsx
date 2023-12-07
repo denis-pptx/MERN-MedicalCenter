@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import ServiceList from '../components/Lists/ServiceList';
-import MySelect from '../components/UI/select/MySelect';
-import MyTextInput from '../components/UI/TextInput/MyTextInput';
+
+import MyButton from '../components/UI/button/MyButton';
+import MyModal from '../components/UI/MyModal/MyModal';
+import MySelect from '../components/UI/Inputs/MySelect';
+import MyInput from '../components/UI/Inputs/MyInput';
+import ServiceCreateForm from '../components/Forms/Service/ServiceCreateForm';
+
+
 
 const Services = () => {
     const [services, setServices] = useState([]);
@@ -10,6 +16,7 @@ const Services = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [sortOrder, setSortOrder] = useState('');
+    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/service')
@@ -42,11 +49,36 @@ const Services = () => {
         })
         : filteredSearchedServices;
 
+    const createService = (newService) => {
+        axios.post('http://localhost:5000/api/service', newService)
+            .then(response => {
+                setServices([...services, response.data]);
+                alert('SERVER: created successfully')
+            })
+            .catch(error => {
+                alert(`SERVER: ${error.response.data.message}`)
+            });
+
+        setModal(false);
+    };
+
     return (
         <div className="page">
             <h1>Services Page</h1>
 
-            <MyTextInput
+            <MyButton onClick={() => setModal(true)}>
+                Создать услугу
+            </MyButton>
+
+            <MyModal visible={modal} setVisible={setModal}>
+                <ServiceCreateForm
+                    create={createService}
+                    categories={categories}
+                />
+            </MyModal>
+
+            <MyInput
+                type="text"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 placeholder="Название"
