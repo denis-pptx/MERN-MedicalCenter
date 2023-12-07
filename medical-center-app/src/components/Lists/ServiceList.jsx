@@ -1,7 +1,7 @@
 import React from 'react';
 import ServiceItem from '../Items/ServiceItem';
 
-const ServiceList = ({ services, onEdit }) => {
+const ServiceList = ({ services, onEdit, onDelete }) => {
     return (
         <div>
             {services.map(service => (
@@ -9,6 +9,7 @@ const ServiceList = ({ services, onEdit }) => {
                     key={service._id}
                     service={service}
                     onEdit={onEdit}
+                    onDelete={onDelete}
                 />
             ))}
         </div>

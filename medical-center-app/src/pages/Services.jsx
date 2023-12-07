@@ -79,6 +79,17 @@ const Services = () => {
         setModalUpdate(false);
     };
 
+    const deleteService = (id) => {
+        axios.delete(`http://localhost:5000/api/service/${id}`)
+            .then(response => {
+                setServices(services.filter(service => service._id !== id));
+                alert('SERVER: deleted successfully');
+            })
+            .catch(error => {
+                alert(`SERVER: ${error.response.data.message}`);
+            });
+    };
+
 
     return (
         <div className="page">
@@ -147,9 +158,10 @@ const Services = () => {
                         <ServiceList
                             services={sortedServices}
                             onEdit={(service) => {
-                                setEditingService({...service, category: service.category._id});
+                                setEditingService({ ...service, category: service.category._id });
                                 setModalUpdate(true);
                             }}
+                            onDelete={deleteService}
                         />
                     }
 

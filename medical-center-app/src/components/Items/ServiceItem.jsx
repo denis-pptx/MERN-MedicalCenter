@@ -22,7 +22,7 @@ const ServiceItem = (props) => {
             </div>
             <div className={styles.buttons}>
                 <MyButton onClick={() => props.onEdit(props.service)}>Изменить</MyButton>
-                <MyButton>Удалить</MyButton>
+                <MyButton onClick={() => props.onDelete(props.service._id)}>Удалить</MyButton>
             </div>
         </div>
     );
