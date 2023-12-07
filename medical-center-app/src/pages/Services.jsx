@@ -6,6 +6,7 @@ import MyModal from '../components/UI/MyModal/MyModal';
 import MySelect from '../components/UI/Inputs/MySelect';
 import MyInput from '../components/UI/Inputs/MyInput';
 import ServiceCreateForm from '../components/Forms/Service/ServiceCreateForm';
+import ServiceUpdateForm from '../components/Forms/Service/ServiceUpdateForm';
 import './Styles.css'
 
 const Services = () => {
@@ -14,7 +15,9 @@ const Services = () => {
     const [selectedCategory, setSelectedCategory] = useState('');
     const [searchTerm, setSearchTerm] = useState('');
     const [sortOrder, setSortOrder] = useState('');
-    const [modal, setModal] = useState(false);
+    const [modalCreate, setModalCreate] = useState(false);
+    const [modalUpdate, setModalUpdate] = useState(false);
+    const [editingService, setEditingService] = useState({ name: '', description: '', cost: 0, category: '' });
 
     useEffect(() => {
         axios.get('http://localhost:5000/api/service')
@@ -57,8 +60,25 @@ const Services = () => {
                 alert(`SERVER: ${error.response.data.message}`)
             });
 
-        setModal(false);
+        setModalCreate(false);
     };
+
+    const updateService = (updatedService) => {
+        axios.put(`http://localhost:5000/api/service/${updatedService._id}`, updatedService)
+            .then(response => {
+                const updatedServices = services.map(service =>
+                    service._id === updatedService._id ? response.data : service
+                );
+                setServices(updatedServices);
+                alert('SERVER: updated successfully');
+            })
+            .catch(error => {
+                alert(`SERVER: ${error.response.data.message}`);
+            });
+
+        setModalUpdate(false);
+    };
+
 
     return (
         <div className="page">
@@ -106,12 +126,12 @@ const Services = () => {
                     </div>
 
                     <div class='form-group'>
-                        <MyButton onClick={() => setModal(true)} style={{width: '100%'}}>
+                        <MyButton onClick={() => setModalCreate(true)} style={{ width: '100%' }}>
                             Создать
                         </MyButton>
                     </div>
 
-                    <MyModal visible={modal} setVisible={setModal}>
+                    <MyModal visible={modalCreate} setVisible={setModalCreate}>
                         <ServiceCreateForm
                             create={createService}
                             categories={categories}
@@ -122,7 +142,24 @@ const Services = () => {
                 <div className="main-content">
 
                     {sortedServices.length === 0 ?
-                        <h1>Не найдено</h1> : <ServiceList services={sortedServices} />}
+                        <h1>Не найдено</h1>
+                        :
+                        <ServiceList
+                            services={sortedServices}
+                            onEdit={(service) => {
+                                setEditingService({...service, category: service.category._id});
+                                setModalUpdate(true);
+                            }}
+                        />
+                    }
+
+                    <MyModal visible={modalUpdate} setVisible={setModalUpdate}>
+                        <ServiceUpdateForm
+                            update={updateService}
+                            editingService={editingService}
+                            categories={categories}
+                        />
+                    </MyModal>
                 </div>
             </div>
 

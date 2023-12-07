@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import MyInput from '../../UI/Inputs/MyInput';
 import MyButton from '../../UI/button/MyButton';
 import MyTextArea from '../../UI/Inputs/MyTextArea';
 import MySelect from '../../UI/Inputs/MySelect';
 import styles from '../Styles.module.css'
 
-const ServiceCreateForm = ({ create, categories }) => {
+const ServiceUpdateForm = ({ update, editingService, categories }) => {
     const defaultService = { name: '', description: '', cost: 0, category: '', };
 
     const [service, setService] = useState(defaultService);
     const [error, setError] = useState('');
 
-    const createService = (e) => {
+    useEffect(() => setService(editingService), [editingService]);
+
+    const updateService = (e) => {
         e.preventDefault();
 
         if (!service.name) {
@@ -40,13 +42,14 @@ const ServiceCreateForm = ({ create, categories }) => {
         }
 
         setError('');
-        create(service);
+        update(service);
         setService(defaultService);
     };
 
+
     return (
         <form class={styles.form}>
-            <div class={styles.title}>Создание услуги</div>
+            <div class={styles.title}>Изменение услуги</div>
 
             {error && <div className={styles['error-message']}>{error}</div>}
 
@@ -89,9 +92,9 @@ const ServiceCreateForm = ({ create, categories }) => {
                 />
             </div>
 
-            <MyButton onClick={createService}>Создать</MyButton>
+            <MyButton onClick={updateService}>Сохранить</MyButton>
         </form>
     );
 };
 
-export default ServiceCreateForm;
+export default ServiceUpdateForm;

@@ -9,7 +9,7 @@ const ServiceItem = (props) => {
                 <div className={styles.title}>
                     {props.service.name}
                 </div>
-                
+
                 <div className={styles.description}>
                     Описание: {props.service.description}
                 </div>
@@ -21,8 +21,8 @@ const ServiceItem = (props) => {
                 </div>
             </div>
             <div className={styles.buttons}>
-                <MyButton className={styles.button}>Открыть</MyButton>
-                <MyButton className={styles.button}>Удалить</MyButton>
+                <MyButton onClick={() => props.onEdit(props.service)}>Изменить</MyButton>
+                <MyButton>Удалить</MyButton>
             </div>
         </div>
     );
