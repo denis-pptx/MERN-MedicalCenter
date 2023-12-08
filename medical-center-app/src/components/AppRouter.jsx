@@ -6,6 +6,7 @@ import FAQ from '../pages/FAQ';
 import Services from '../pages/Services';
 import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
+import Register from '../pages/Register';
 import Logout from './Logout';
 
 const AppRouter = () => {
@@ -18,6 +19,7 @@ const AppRouter = () => {
 
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
+            <Route path="/register" element={<Register />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );

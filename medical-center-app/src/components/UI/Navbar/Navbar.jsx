@@ -33,6 +33,11 @@ const Navbar = () => {
                             <Link to="/login">Войти</Link>
                         </li>
                     }
+                    {!isAuth &&
+                        <li>
+                            <Link to="/register">Регистрация</Link>
+                        </li>
+                    }
                     {isAuth &&
                         <li>
                             <Link to="/logout">Выйти</Link>
