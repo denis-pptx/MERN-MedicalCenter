@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.module.css';
 import AuthContext from '../../../context/AuthContext';
 
-const Navbar = () => {
+function Navbar() {
     const { isAuth } = useContext(AuthContext);
 
     const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -68,6 +68,6 @@ const Navbar = () => {
             </ul>
         </nav>
     );
-};
+}
 
 export default Navbar;

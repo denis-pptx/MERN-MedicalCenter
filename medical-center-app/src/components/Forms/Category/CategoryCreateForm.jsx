@@ -4,7 +4,7 @@ import MyButton from '../../UI/button/MyButton';
 import MyTextArea from '../../UI/Inputs/MyTextArea';
 import styles from '../Styles.module.css'
 
-const CategoryCreateForm = ({ create }) => {
+function CategoryCreateForm({ create }) {
     const defaultCategory = { name: '', description: '' };
 
     const [category, setCategory] = useState(defaultCategory);

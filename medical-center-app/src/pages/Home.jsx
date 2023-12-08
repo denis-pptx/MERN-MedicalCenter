@@ -22,6 +22,7 @@ const Home = () => {
                 <WeatherComponent />
                 <JokeComponent />
             </Block>
+
         </div>
     );
 };
