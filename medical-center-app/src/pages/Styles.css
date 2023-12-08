@@ -36,3 +36,31 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+
+
+.banner-image {
+    width: 100%;
+    animation: moveAndRotate 4s linear infinite;
+    box-shadow: 0 0 15px 0 var(--deep-blue);
+    object-fit: cover;
+    border-radius: 20px;
+}
+
+.banner-container {
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+@keyframes moveAndRotate {
+    0% {
+        transform: translate(-1%, -2%) rotate(-1deg);
+    }
+
+    50% {
+        transform: translate(1%, 2%) rotate(1deg);
+    }
+
+    100% {
+        transform: translate(-1%, -2%) rotate(-1deg);
+    }
+}
