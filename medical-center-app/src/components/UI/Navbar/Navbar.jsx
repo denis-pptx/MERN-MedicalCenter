@@ -27,6 +27,11 @@ const Navbar = () => {
                             <Link to="/categories">Категории</Link>
                         </li>
                     }
+                    {isAuth &&
+                        <li>
+                            <Link to="/orders">Заказы</Link>
+                        </li>
+                    }
                 </div>
 
                 <div>

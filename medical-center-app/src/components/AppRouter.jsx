@@ -9,6 +9,7 @@ import NotFound from '../pages/NotFound';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
 import Logout from './Logout';
+import Orders from '../pages/Orders';
 
 const AppRouter = () => {
     return (
@@ -18,6 +19,7 @@ const AppRouter = () => {
             <Route path="/faq" element={<FAQ />} />
             <Route path="/services" element={<Services />} />
             <Route path="/categories" element={<Categories />} />
+            <Route path="/orders" element={<Orders />} />
 
             <Route path="/login" element={<Login />} />
             <Route path="/logout" element={<Logout />} />
