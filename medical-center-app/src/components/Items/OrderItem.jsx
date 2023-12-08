@@ -2,8 +2,8 @@ import React from 'react';
 import MyButton from '../UI/button/MyButton';
 import styles from './Styles.module.css';
 
-const OrderItem = (props) => {
 
+const OrderItem = (props) => {
     return (
         <div className={styles.card}>
             <div className={styles.cardContent}>
@@ -16,10 +16,10 @@ const OrderItem = (props) => {
                     Телефон: {props.order.phone}
                 </div>
                 <div className={styles.description}>
-                    Почта: {props.order.mail}
+                    Почта: {props.order.email}
                 </div>
                 <div className={styles.description}>
-                    Услуга: {props.order.service ? props.order.service.name : "<удалена>" }
+                    Услуга: {props.order.service ? props.order.service.name : "<удалена>"}
                 </div>
                 <div className={styles.description}>
                     Статус: {props.order.status}
