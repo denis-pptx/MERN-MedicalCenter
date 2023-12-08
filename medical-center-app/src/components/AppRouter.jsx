@@ -5,6 +5,8 @@ import About from '../pages/About';
 import FAQ from '../pages/FAQ';
 import Services from '../pages/Services';
 import NotFound from '../pages/NotFound';
+import Login from '../pages/Login';
+import Logout from './Logout';
 
 const AppRouter = () => {
     return (
@@ -13,6 +15,9 @@ const AppRouter = () => {
             <Route path="/about" element={<About />} />
             <Route path="/faq" element={<FAQ />} />
             <Route path="/services" element={<Services />} />
+
+            <Route path="/login" element={<Login />} />
+            <Route path="/logout" element={<Logout />} />
             <Route path="*" element={<NotFound />} />
         </Routes>
     );
