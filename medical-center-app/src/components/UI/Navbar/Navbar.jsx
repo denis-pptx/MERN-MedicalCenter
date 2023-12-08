@@ -22,9 +22,11 @@ const Navbar = () => {
                     <li>
                         <Link to="/services">Услуги</Link>
                     </li>
-                    <li>
-                        <Link to="/categories">Категории</Link>
-                    </li>
+                    {isAuth &&
+                        <li>
+                            <Link to="/categories">Категории</Link>
+                        </li>
+                    }
                 </div>
 
                 <div>
