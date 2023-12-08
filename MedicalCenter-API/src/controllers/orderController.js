@@ -8,7 +8,7 @@ const orderController = {
                 filter.status = req.query.status;
             }
 
-            const orders = await Order.find(filter);
+            const orders = await Order.find(filter).populate('service');
             res.status(200).json(orders);
         } catch (error) {
             console.error(error);
@@ -21,7 +21,7 @@ const orderController = {
 
     getById: async (req, res) => {
         try {
-            const order = await Order.findById(req.params.id);
+            const order = await Order.findById(req.params.id).populate('service');
             if (!order) {
                 return res.status(404).json({ message: 'Order not found' });
             }
@@ -39,6 +39,7 @@ const orderController = {
         try {
             const newOrder = new Order(req.body);
             await newOrder.save();
+            await newOrder.populate('service');
             res.status(201).json(newOrder);
         } catch (error) {
             console.error(error);
@@ -55,7 +56,7 @@ const orderController = {
                 req.params.id,
                 req.body,
                 { new: true, runValidators: true }
-            );
+            ).populate('service');
 
             if (!order) {
                 return res.status(404).json({ message: 'Order not found' });
