@@ -75,7 +75,7 @@ const OrderUpdateForm = ({ update, editingOrder, statusArray }) => {
 
             <div class='form-group'>
                 <MySelect
-                    value={order.category}
+                    value={order.status}
                     onChange={(e) => setOrder({ ...order, status: e.target.value })}
                     defaultName="Статус"
                     options={statusArray.map((status) => ({
