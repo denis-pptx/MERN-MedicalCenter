@@ -14,12 +14,15 @@
 .block ul {
     margin-left: 30px;
 }
-  
+
 .block p {
     margin: 10px 0;
 }
 
-.block blockquote {
+.block blockquote,
+.block dl,
+.block dt,
+.block dd {
     padding: revert;
     margin: revert;
 }
