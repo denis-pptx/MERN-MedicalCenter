@@ -18,13 +18,13 @@ nav li {
     display: inline-block;
 }
 
-nav a {
+nav a, nav li {
     text-decoration: none;
     color: #fff;
     font-size: 20px;
     font-weight: bold;
 }
 
-nav :hover {
+nav li :hover {
     color: #ffcc00;
 }
