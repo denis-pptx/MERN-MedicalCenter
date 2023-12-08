@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect, useContext } from 'react';
+import $axios from '../http/index'
 import ServiceList from '../components/Lists/ServiceList';
 import MyButton from '../components/UI/button/MyButton';
 import MyModal from '../components/UI/MyModal/MyModal';
@@ -8,8 +8,10 @@ import MyInput from '../components/UI/Inputs/MyInput';
 import ServiceCreateForm from '../components/Forms/Service/ServiceCreateForm';
 import ServiceUpdateForm from '../components/Forms/Service/ServiceUpdateForm';
 import './Styles.css'
+import AuthContext from '../context/AuthContext';
 
 const Services = () => {
+    const { isAuth } = useContext(AuthContext);
     const [services, setServices] = useState([]);
     const [categories, setCategories] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState('');
@@ -20,11 +22,11 @@ const Services = () => {
     const [editingService, setEditingService] = useState({ name: '', description: '', cost: 0, category: '' });
 
     useEffect(() => {
-        axios.get('http://localhost:5000/api/service')
+        $axios.get('http://localhost:5000/api/service')
             .then(response => setServices(response.data))
             .catch(error => console.error('Error fetching services:', error));
 
-        axios.get('http://localhost:5000/api/category')
+        $axios.get('http://localhost:5000/api/category')
             .then(response => setCategories(response.data))
             .catch(error => console.error('Error fetching categories:', error));
     }, []);
@@ -51,7 +53,7 @@ const Services = () => {
         : filteredSearchedServices;
 
     const createService = (newService) => {
-        axios.post('http://localhost:5000/api/service', newService)
+        $axios.post('http://localhost:5000/api/service', newService)
             .then(response => {
                 setServices([...services, response.data]);
                 alert('SERVER: created successfully')
@@ -64,7 +66,7 @@ const Services = () => {
     };
 
     const updateService = (updatedService) => {
-        axios.put(`http://localhost:5000/api/service/${updatedService._id}`, updatedService)
+        $axios.put(`http://localhost:5000/api/service/${updatedService._id}`, updatedService)
             .then(response => {
                 const updatedServices = services.map(service =>
                     service._id === updatedService._id ? response.data : service
@@ -80,7 +82,7 @@ const Services = () => {
     };
 
     const deleteService = (id) => {
-        axios.delete(`http://localhost:5000/api/service/${id}`)
+        $axios.delete(`http://localhost:5000/api/service/${id}`)
             .then(response => {
                 setServices(services.filter(service => service._id !== id));
                 alert('SERVER: deleted successfully');
@@ -136,18 +138,23 @@ const Services = () => {
                         />
                     </div>
 
-                    <div class='form-group'>
-                        <MyButton onClick={() => setModalCreate(true)} style={{ width: '100%' }}>
-                            Создать
-                        </MyButton>
-                    </div>
+                    {isAuth && (
+                        <>
+                            <div class='form-group'>
+                                <MyButton onClick={() => setModalCreate(true)} style={{ width: '100%' }}>
+                                    Создать
+                                </MyButton>
+                            </div>
 
-                    <MyModal visible={modalCreate} setVisible={setModalCreate}>
-                        <ServiceCreateForm
-                            create={createService}
-                            categories={categories}
-                        />
-                    </MyModal>
+                            <MyModal visible={modalCreate} setVisible={setModalCreate}>
+                                <ServiceCreateForm
+                                    create={createService}
+                                    categories={categories}
+                                />
+                            </MyModal>
+                        </>
+                    )}
+
                 </div>
 
                 <div className="main-content">

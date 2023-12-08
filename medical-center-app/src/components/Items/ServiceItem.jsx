@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import MyButton from '../UI/button/MyButton';
 import styles from './Styles.module.css';
+import AuthContext from '../../context/AuthContext';
 
 const ServiceItem = (props) => {
+    const { isAuth } = useContext(AuthContext);
+
     return (
         <div className={styles.card}>
             <div className={styles.cardContent}>
@@ -20,10 +23,14 @@ const ServiceItem = (props) => {
                     Стоимость: {props.service.cost}$
                 </div>
             </div>
-            <div className={styles.buttons}>
-                <MyButton onClick={() => props.onEdit(props.service)}>Изменить</MyButton>
-                <MyButton onClick={() => props.onDelete(props.service._id)}>Удалить</MyButton>
-            </div>
+
+            {isAuth && (
+                <div className={styles.buttons}>
+                    <MyButton onClick={() => props.onEdit(props.service)}>Изменить</MyButton>
+                    <MyButton onClick={() => props.onDelete(props.service._id)}>Удалить</MyButton>
+                </div>
+            )}
+
         </div>
     );
 };

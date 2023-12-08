@@ -19,6 +19,7 @@ const Login = () => {
             const { token } = response.data;
 
             localStorage.setItem('token', token);
+            console.log(token);
             setIsAuth(true);
             navigate('/');
         } catch (error) {
@@ -51,7 +52,7 @@ const Login = () => {
                             onChange={(e) => setPassword(e.target.value)}
                         />
                     </div>
-                    
+
                     <MyButton onClick={handleLogin}>Войти</MyButton>
                 </form>
             </div>
